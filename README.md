@@ -80,20 +80,10 @@ npm run dev
 
 Configure seu arquivo `.env.local` com as seguintes variáveis:
 
-```env
-# Configuração da API
-PORT=3001
-
-# Configuração do Playwright
-PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright
-
-# FireCrawl API (opcional)
+# FireCrawl API 
 FIRECRAWL_API_KEY=sua_chave_api
 FIRECRAWL_API_URL=url_da_api
 
-# Configuração do Banco de Dados (se necessário)
-DATABASE_URL=sua_url_do_banco
-```
 
 ## 📚 Documentação da API
 
@@ -132,7 +122,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE.md](LICENSE.md) p
 ## 🤔 Suporte
 
 - Abra uma [issue](https://github.com/joaogsantosc/job-crawler-api/issues)
-- Entre em contato via [email](mailto:seu-email@exemplo.com)
+- Entre em contato via [email](mailto:oi@joaogabriel.cc)
 
 ## 🌟 Contribuidores
 
