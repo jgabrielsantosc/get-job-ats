@@ -94,41 +94,10 @@ http://localhost:3001/api-docs
 
 ### Endpoints Principais
 
-- `GET /api/jobs` - Lista todas as vagas disponíveis
-- `GET /api/jobs/:platform` - Busca vagas de uma plataforma específica (gupy, workable, lever)
-- `GET /api/jobs/search` - Pesquisa vagas com filtros personalizados
+- `GET /scraper-job` - Lista todas as vagas disponíveis
+- `GET /job-details` - Retorna as informações das vagas de qualquer plataforma (ex: gupy, workable, lever)
 
-## 🤝 Como Contribuir
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature
-   ```bash
-   git checkout -b feature/NovaFeature
-   ```
-3. Commit suas alterações
-   ```bash
-   git commit -m 'Adiciona nova feature'
-   ```
-4. Push para a branch
-   ```bash
-   git push origin feature/NovaFeature
-   ```
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
-
-## 🤔 Suporte
-
-- Abra uma [issue](https://github.com/joaogsantosc/job-crawler-api/issues)
-- Entre em contato via [email](mailto:oi@joaogabriel.cc)
-
-## 🌟 Contribuidores
-
-<a href="https://github.com/joaogsantosc/job-crawler-api/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=joaogsantosc/job-crawler-api" />
-</a>
 
 ---
 
