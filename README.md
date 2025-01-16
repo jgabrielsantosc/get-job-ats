@@ -6,10 +6,27 @@ Uma API universal para coletar vagas de emprego de diferentes job boards de form
 
 Este projeto é um web scraper especializado em coletar vagas de emprego de diferentes plataformas de recrutamento, centralizando todas as informações em uma única API. Atualmente, suportamos as seguintes plataformas:
 
+### Portais Suportados
+
 - ✅ Gupy
-- ✅ Workable
 - ✅ Lever
-- 🚧 Greenhouse (em desenvolvimento)
+- ✅ Greenhouse
+- ✅ Workable
+- ✅ BambooHR
+- ✅ Breezy
+- ✅ iCIMS
+- ✅ Recruitee
+- ✅ Factorial
+- ✅ Abler
+- ✅ Compleo
+- ✅ Enlizt
+- ✅ Gupy
+- ✅ HiringRoom
+- ✅ Inhire
+- ✅ PandaP
+- ✅ Quickin
+- ✅ Recrut.ai
+- ✅ Recrutei
 
 ## 🚀 Funcionalidades
 
@@ -127,6 +144,3 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE.md](LICENSE.md) p
 
 Desenvolvido com ❤️ por [João Santos](https://github.com/joaogsantosc)
 ```
-
-
-
