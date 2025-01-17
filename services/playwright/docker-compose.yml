@@ -1,0 +1,17 @@
+services:
+  playwright:
+    build:
+      context: ../..
+      dockerfile: services/playwright/Dockerfile
+    platform: linux/amd64
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - HOST=0.0.0.0
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp=unconfined
+    shm_size: '2gb' 
