@@ -40,7 +40,8 @@ ENV NODE_ENV=production \
 
 # Criar diretório para o Playwright e ajustar permissões
 RUN mkdir -p /ms-playwright && \
-    chown -R node:node /ms-playwright
+    chown -R node:node /ms-playwright /app && \
+    chmod -R 777 /ms-playwright
 
 # Mudar para usuário não-root
 USER node
