@@ -5,11 +5,5 @@ services:
       dockerfile: services/api/Dockerfile
     ports:
       - "3001:3001"
-    environment:
-      - NODE_ENV=development
-      - PORT=3001
-      - HOST=0.0.0.0
-      - PLAYWRIGHT_SERVICE_URL=${PLAYWRIGHT_SERVICE_URL:-http://localhost:3000}
-      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
-      - FIRECRAWL_API_URL=${FIRECRAWL_API_URL}
-      - GUPY_BUILD_ID=${GUPY_BUILD_ID} 
+    env_file:
+      - .env 

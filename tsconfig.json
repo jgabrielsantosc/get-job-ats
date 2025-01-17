@@ -17,10 +17,13 @@
     },
     "include": [
       "src/**/*.ts",
+      "src/**/*.json",
       "src/playwright/playwright-extra.d.ts"
     ],
     "exclude": [
       "node_modules",
-      "**/*.spec.ts"
+      "dist",
+      "**/*.spec.ts",
+      "src/tests"
     ]
   }

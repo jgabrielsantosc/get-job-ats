@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 COPY . .
-RUN npm run build
+RUN mkdir -p dist && npm run build:api
 
 ENV NODE_ENV=production \
     PORT=3001 \
