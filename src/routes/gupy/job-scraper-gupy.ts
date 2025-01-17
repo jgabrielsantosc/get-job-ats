@@ -7,8 +7,11 @@ export const scraperJobGupy = async (url: string): Promise<string[]> => {
   try {
     browser = await chromium.launch({ 
       headless: true,
-      channel: 'chrome',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage'
+      ]
     });
 
     const context = await browser.newContext();
