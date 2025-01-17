@@ -31,13 +31,11 @@ WORKDIR /app
 # Copiar apenas os arquivos de dependências primeiro
 COPY package*.json ./
 
-# Instalar dependências de produção
+# Instalar dependências de produção e Playwright
 RUN npm ci --only=production && \
-    # Configurar variáveis do Playwright antes da instalação
     PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
     PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
     npm i playwright && \
-    # Instalar apenas o Chromium
     npx playwright install chromium --with-deps
 
 # Copiar o resto dos arquivos
@@ -46,15 +44,19 @@ COPY . .
 # Build
 RUN npm run build
 
-# Configurar variáveis de ambiente
-ENV NODE_ENV=production
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-ENV PORT=3001
+# Configurar variáveis de ambiente padrão
+ENV NODE_ENV=production \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
+    PORT=3001 \
+    HOST=0.0.0.0 \
+    # Definir valores padrão para variáveis obrigatórias
+    FIRECRAWL_API_URL=https://api.firecrawl.dev/v0/scrape
 
-# Healthcheck
+# Healthcheck mais robusto
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3001/health || exit 1
 
+# Expor porta
 EXPOSE 3001
 
 # Configurar usuário não-root
@@ -63,4 +65,5 @@ RUN groupadd -r nodejs && useradd -r -g nodejs -G audio,video nodejs \
 
 USER nodejs
 
+# Comando de inicialização com verificação de variáveis de ambiente
 CMD ["node", "dist/api.js"]

@@ -10,12 +10,19 @@ import path from 'path';
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-console.log('Variáveis de ambiente em api.ts:');
+// Configuração inicial
+console.log('🚀 Iniciando aplicação...');
+console.log('\n📋 Variáveis de ambiente:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT);
+console.log('HOST:', process.env.HOST);
+console.log('PLAYWRIGHT_BROWSERS_PATH:', process.env.PLAYWRIGHT_BROWSERS_PATH);
 console.log('FIRECRAWL_API_KEY:', process.env.FIRECRAWL_API_KEY ? 'Definido' : 'Não definido');
 console.log('FIRECRAWL_API_URL:', process.env.FIRECRAWL_API_URL);
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = parseInt(process.env.PORT || '3001', 10);
+const host = process.env.HOST || '0.0.0.0';
 
 app.use(express.json());
 
@@ -154,11 +161,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-const server = app.listen(port, () => {
-  console.log(`API rodando em http://localhost:${port}`);
+const server = app.listen(port, host, () => {
+  console.log('\n🌐 Servidor iniciado com sucesso:');
+  console.log(`📍 URL local: http://localhost:${port}`);
+  console.log(`🌍 URL externa: http://${host}:${port}`);
+  console.log(`📚 Documentação: http://${host}:${port}/api-docs`);
+  console.log(`💓 Health check: http://${host}:${port}/health`);
 });
-
-console.log('Iniciando aplicação...');
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('PLAYWRIGHT_BROWSERS_PATH:', process.env.PLAYWRIGHT_BROWSERS_PATH);
-console.log('PORT:', process.env.PORT);
