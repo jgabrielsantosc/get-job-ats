@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.build.json && npm run copy-json",
     "build:api": "tsc -p tsconfig.build.json && npm run copy-json",
     "dev": "nodemon --exec ts-node src/api.ts",
-    "copy-json": "cp -r src/json dist/ || true",
+    "copy-json": "mkdir -p dist && cp -r src/json dist/ || true",
     "prebuild": "npx playwright install chromium --with-deps"
   },
   "keywords": [],
