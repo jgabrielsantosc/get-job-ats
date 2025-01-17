@@ -17,7 +17,7 @@
     },
     "include": [
       "src/**/*.ts",
-      "playwright-extra.d.ts"
+      "src/playwright/playwright-extra.d.ts"
     ],
     "exclude": [
       "node_modules",

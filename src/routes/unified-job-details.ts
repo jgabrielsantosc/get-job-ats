@@ -1,24 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 import { ExpressHandler } from '../types';
-import { jobInhireHandler } from './job-inhire';
-import { jobGupyHandler } from './job-gupy';
-import { jobAblerHandler } from './job-abler';
-import { jobLeverHandler } from './job-lever';
-import { jobQuickinHandler } from './job-quickin';
-import { jobSolidesHandler } from './job-solides';
-import { jobGreenhouseHandler } from './job-greenhouse';
-import { jobWorkableHandler } from './job-workable';
-import { jobRecruteiHandler } from './job-recrutei';
-import { jobRecrutHandler } from './job-recrut';
-import { jobBreezyHandler } from './job-breezy';
-import { jobFactorialHandler } from './job-factorial';
-import { jobEnliztHandler } from './job-enlizt';
-import { jobBambooHandler } from './job-bamboo';
-import { jobWorkdayHandler } from './job-workday';
-import { jobHireroomHandler } from './job-hireroom';
-import { jobPandapeHandler } from './job-pandape';
-import { jobIcimsHandler } from './job-icims';
-import { jobRecruiteeHandler } from './job-recruitee';
+import { jobInhireHandler } from './inhire/job-inhire';
+import { jobGupyHandler } from './gupy/job-gupy';
+import { jobAblerHandler } from './abler/job-abler';
+import { jobLeverHandler } from './lever/job-lever';
+import { jobQuickinHandler } from './quickin/job-quickin';
+import { jobSolidesHandler } from './solides/job-solides';
+import { jobGreenhouseHandler } from './greenhouse/job-greenhouse';
+import { jobWorkableHandler } from './workable/job-workable';
+import { jobRecruteiHandler } from './recruitei/job-recrutei';
+import { jobRecrutHandler } from './recruitai/job-recrut';
+import { jobBreezyHandler } from './breezy/job-breezy';
+import { jobFactorialHandler } from './factorial/job-factorial';
+import { jobEnliztHandler } from './enlizt/job-enlizt';
+import { jobBambooHandler } from './bamboo/job-bamboo';
+import { jobWorkdayHandler } from './workday/job-workday';
+import { jobHireroomHandler } from './hireroom/job-hireroom';
+import { jobPandapeHandler } from './pandape/job-pandape';
+import { jobIcimsHandler } from './icims/job-icims';
+import { jobRecruiteeHandler } from './recruitee/job-recruitee';
 
 // Mapeamento de URLs para handlers
 const jobBoardHandlers: { [key: string]: ExpressHandler } = {
