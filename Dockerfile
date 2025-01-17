@@ -23,6 +23,7 @@ RUN npm run build
 # Configurar variáveis de ambiente
 ENV NODE_ENV=production
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+ENV PORT=3001
 
 # Adicionar healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -30,4 +31,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 
 EXPOSE 3001
 
-CMD ["npm", "start"]
+# Especificar comando explicitamente para o App Platform
+CMD ["node", "dist/api.js"]

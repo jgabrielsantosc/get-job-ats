@@ -6,10 +6,7 @@
     "start": "node dist/api.js",
     "build": "tsc -p tsconfig.build.json && echo 'TypeScript compilation complete' && ls -R dist && (cp src/json/*.json dist/ || true)",
     "dev": "nodemon --exec ts-node src/api.ts",
-    "prebuild": "npx playwright install chromium --with-deps",
-    "docker:build": "docker build -t job-crawler-api .",
-    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
-    "docker:prod": "docker-compose up"
+    "prebuild": "npx playwright install chromium --with-deps"
   },
   "keywords": [],
   "author": "",

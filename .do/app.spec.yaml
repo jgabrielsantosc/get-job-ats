@@ -1,0 +1,16 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+name: get-job-ats
+region: nyc
+services:
+- dockerfile_path: Dockerfile
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: jgabrielsantosc/get-job-ats
+  http_port: 3001
+  instance_count: 1
+  instance_size_slug: professional-xs
+  name: get-job-ats
+  source_dir: / 
