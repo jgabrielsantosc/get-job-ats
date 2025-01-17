@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/api.ts",
+    "start": "node dist/api.js",
     "build": "tsc -p tsconfig.build.json && echo 'TypeScript compilation complete' && ls -R dist && (cp src/json/*.json dist/ || true)",
-    "serve": "node dist/api.js",
-    "install-browsers": "playwright install chromium firefox webkit",
-    "build:digitalocean": "npm ci && npm run prebuild && npm run build --verbose",
-    "postbuild": "ls -R dist",
     "dev": "nodemon --exec ts-node src/api.ts",
-    "start:prod": "node dist/api.js",
     "prebuild": "npx playwright install chromium --with-deps"
   },
   "keywords": [],

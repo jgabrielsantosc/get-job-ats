@@ -1,21 +1,73 @@
-FROM mcr.microsoft.com/playwright:v1.48.0-jammy
+FROM node:18-slim
+
+# Instalar apenas as dependências essenciais para o Chromium
+RUN apt-get update && \
+    apt-get install -y \
+    libglib2.0-0 \
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libdbus-1-3 \
+    libxcb1 \
+    libxkbcommon0 \
+    libx11-6 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
+# Copiar apenas os arquivos de dependências primeiro
 COPY package*.json ./
-RUN rm -f package-lock.json && npm install
 
-# Instale explicitamente os navegadores do Playwright
-RUN npx playwright install --with-deps chromium
+# Instalar dependências de produção e Playwright
+RUN npm ci --only=production && \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
+    npm i playwright && \
+    npx playwright install chromium --with-deps
 
-COPY tsconfig*.json ./
-COPY src ./src
+# Copiar o resto dos arquivos
+COPY . .
 
+# Build
 RUN npm run build
 
-# Defina a variável de ambiente PLAYWRIGHT_BROWSERS_PATH
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+# Configurar variáveis de ambiente padrão
+ENV NODE_ENV=production \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
+    PORT=3001 \
+    HOST=0.0.0.0 \
+    # Definir valores padrão para variáveis obrigatórias
+    FIRECRAWL_API_URL=https://api.firecrawl.dev/v0/scrape
 
+# Verificar variáveis de ambiente na inicialização
+COPY check-env.sh /app/
+RUN chmod +x /app/check-env.sh
+
+# Healthcheck mais robusto
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
+
+# Expor porta
 EXPOSE 3001
 
-CMD ["npm", "run", "start:prod"]
+# Configurar usuário não-root
+RUN groupadd -r nodejs && useradd -r -g nodejs -G audio,video nodejs \
+    && chown -R nodejs:nodejs /app
+
+USER nodejs
+
+# Comando de inicialização com verificação de variáveis de ambiente
+CMD ["/bin/bash", "-c", "./check-env.sh && node dist/api.js"]
