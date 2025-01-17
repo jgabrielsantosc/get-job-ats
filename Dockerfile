@@ -52,6 +52,10 @@ ENV NODE_ENV=production \
     # Definir valores padrão para variáveis obrigatórias
     FIRECRAWL_API_URL=https://api.firecrawl.dev/v0/scrape
 
+# Verificar variáveis de ambiente na inicialização
+COPY check-env.sh /app/
+RUN chmod +x /app/check-env.sh
+
 # Healthcheck mais robusto
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3001/health || exit 1
@@ -66,4 +70,4 @@ RUN groupadd -r nodejs && useradd -r -g nodejs -G audio,video nodejs \
 USER nodejs
 
 # Comando de inicialização com verificação de variáveis de ambiente
-CMD ["node", "dist/api.js"]
+CMD ["/bin/bash", "-c", "./check-env.sh && node dist/api.js"]

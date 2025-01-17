@@ -7,8 +7,31 @@ import { unifiedUrlScraper } from './routes/urls-scraper';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Carrega as variáveis de ambiente do arquivo .env
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+// Carrega as variáveis de ambiente
+dotenv.config({ 
+  path: path.resolve(__dirname, '../.env'),
+});
+// Carrega variáveis locais se não estiver em produção
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ 
+    path: path.resolve(__dirname, '../.env.local'),
+    override: true 
+  });
+}
+
+// Validação de variáveis obrigatórias
+const requiredEnvVars = [
+  'FIRECRAWL_API_KEY',
+  'FIRECRAWL_API_URL',
+  'GUPY_BUILD_ID'
+];
+
+requiredEnvVars.forEach(varName => {
+  if (!process.env[varName]) {
+    console.error(`❌ Variável de ambiente ${varName} não definida`);
+    process.exit(1);
+  }
+});
 
 // Configuração inicial
 console.log('🚀 Iniciando aplicação...');
