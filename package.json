@@ -5,13 +5,11 @@
   "scripts": {
     "start": "node dist/api.js",
     "build": "tsc -p tsconfig.build.json && echo 'TypeScript compilation complete' && ls -R dist && (cp src/json/*.json dist/ || true)",
-    "serve": "node dist/api.js",
-    "install-browsers": "playwright install chromium firefox webkit",
-    "build:digitalocean": "npm ci && npm run prebuild && npm run build",
-    "postbuild": "ls -R dist",
     "dev": "nodemon --exec ts-node src/api.ts",
-    "start:prod": "node dist/api.js",
-    "prebuild": "npx playwright install chromium --with-deps"
+    "prebuild": "npx playwright install chromium --with-deps",
+    "docker:build": "docker build -t job-crawler-api .",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
+    "docker:prod": "docker-compose up"
   },
   "keywords": [],
   "author": "",

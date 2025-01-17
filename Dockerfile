@@ -1,23 +1,32 @@
 FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
+# Instalar curl para healthcheck
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Copiar apenas os arquivos necessários para instalar dependências
+# Copiar package.json e package-lock.json
 COPY package*.json ./
+
+# Instalar dependências
 RUN npm ci
 
-# Instalar apenas o Chromium
-RUN npx playwright install --with-deps chromium
+# Instalar Chromium com dependências necessárias
+RUN npx playwright install chromium --with-deps
 
-# Copiar arquivos de build
+# Copiar o resto dos arquivos
 COPY . .
 
 # Build da aplicação
 RUN npm run build
 
 # Configurar variáveis de ambiente
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 ENV NODE_ENV=production
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+# Adicionar healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
 
 EXPOSE 3001
 

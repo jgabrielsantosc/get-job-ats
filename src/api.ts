@@ -139,6 +139,11 @@ app.post('/job-details', handleJobDetailsRequest);
 // Rota única para processar qualquer job board
 app.post('/scraper-job', unifiedUrlScraper);
 
+// Adicionar rota de health check
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'healthy' });
+});
+
 // Middleware de tratamento de erros
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof SyntaxError && 'body' in err) {

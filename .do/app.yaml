@@ -2,10 +2,9 @@ name: job-crawler-api
 services:
 - name: api
   dockerfile_path: Dockerfile
-  github:
+  git:
     branch: main
-    deploy_on_push: true
-    repo: jgabrielsantosc/get-job-ats
+    repo_clone_url: https://github.com/jgabrielsantosc/get-job-ats.git
   instance_count: 1
   instance_size_slug: professional-xs
   envs:

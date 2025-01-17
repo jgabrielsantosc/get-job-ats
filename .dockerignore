@@ -6,4 +6,5 @@ dist
 .env*
 *.md
 test-results/
-playwright-report/ 
+playwright-report/
+.do/ 
