@@ -2,20 +2,23 @@ FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
 WORKDIR /app
 
+# Copiar apenas os arquivos necessários para instalar dependências
 COPY package*.json ./
-RUN rm -f package-lock.json && npm install
+RUN npm ci
 
-# Instale explicitamente os navegadores do Playwright
+# Instalar apenas o Chromium
 RUN npx playwright install --with-deps chromium
 
-COPY tsconfig*.json ./
-COPY src ./src
+# Copiar arquivos de build
+COPY . .
 
+# Build da aplicação
 RUN npm run build
 
-# Defina a variável de ambiente PLAYWRIGHT_BROWSERS_PATH
+# Configurar variáveis de ambiente
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+ENV NODE_ENV=production
 
 EXPOSE 3001
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "start"]

@@ -1,0 +1,28 @@
+name: job-crawler-api
+services:
+- name: api
+  dockerfile_path: Dockerfile
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: jgabrielsantosc/get-job-ats
+  instance_count: 1
+  instance_size_slug: professional-xs
+  envs:
+  - key: NODE_ENV
+    value: production
+    scope: RUN_TIME
+  - key: PLAYWRIGHT_BROWSERS_PATH
+    value: /ms-playwright
+    scope: RUN_TIME
+  - key: FIRECRAWL_API_KEY
+    scope: RUN_TIME
+    type: SECRET
+  - key: FIRECRAWL_API_URL
+    scope: RUN_TIME
+    type: SECRET
+  http_port: 3001
+  health_check:
+    http_path: /health
+    initial_delay_seconds: 30
+    period_seconds: 60 

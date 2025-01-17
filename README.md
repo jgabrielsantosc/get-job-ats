@@ -97,7 +97,27 @@ http://localhost:3001/api-docs
 - `GET /scraper-job` - Lista todas as vagas disponíveis
 - `GET /job-details` - Retorna as informações das vagas de qualquer plataforma (ex: gupy, workable, lever)
 
+## Deploy no DigitalOcean App Platform
 
+1. Faça fork deste repositório para sua conta do GitHub
+
+2. No DigitalOcean App Platform:
+   - Clique em "Create App"
+   - Selecione o repositório do GitHub
+   - Selecione a branch main
+   - Configure as variáveis de ambiente:
+     - FIRECRAWL_API_KEY
+     - FIRECRAWL_API_URL
+     - NODE_ENV=production
+     - PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+3. O App Platform detectará automaticamente que é uma aplicação Node.js e usará:
+   - Build command: `npm run build:digitalocean`
+   - Run command: `npm start`
+
+4. Selecione o plano Basic e a região mais próxima dos seus usuários
+
+5. Clique em "Launch App"
 
 ---
 
