@@ -14,8 +14,6 @@ console.log('Variáveis de ambiente em api.ts:');
 console.log('FIRECRAWL_API_KEY:', process.env.FIRECRAWL_API_KEY ? 'Definido' : 'Não definido');
 console.log('FIRECRAWL_API_URL:', process.env.FIRECRAWL_API_URL);
 
-process.env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || '/usr/local/share/playwright';
-
 const app = express();
 const port = process.env.PORT || 3001;
 
